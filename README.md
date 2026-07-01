@@ -2,6 +2,12 @@
 
 A positive, on-brand bridging page for visitors arriving at the old OrderDigital domain. It announces the rebrand to **Takeaway Growth Agency** and automatically redirects to the new site.
 
+## Live site
+
+- **Netlify URL:** https://orderdigital-bridge.netlify.app
+- **GitHub repo:** https://github.com/kyridigital/orderdigital-bridge
+- **Netlify admin:** https://app.netlify.com/projects/orderdigital-bridge
+
 ## What it does
 
 - Welcomes OrderDigital visitors with an exciting rebrand message
@@ -33,39 +39,29 @@ npm run build
 
 The static site is output to the `dist/` folder.
 
-## Deploy on Netlify
+## Continuous deployment
 
-### Option 1: Drag & drop
+A GitHub Actions workflow (`.github/workflows/deploy.yml`) is configured to trigger a Netlify deploy on every push to `main`.
 
-1. Run `npm run build`
-2. Drag the `dist/` folder into [Netlify Drop](https://app.netlify.com/drop)
-3. Set your custom domain to the old OrderDigital domain
+To complete the setup, connect the GitHub repo inside Netlify:
 
-### Option 2: Git-connected continuous deploy
-
-1. Push this repo to GitHub
-2. In Netlify, click **Add new site → Import an existing project**
-3. Select the GitHub repo
-4. Build settings are already configured in `netlify.toml`:
+1. Go to https://app.netlify.com/projects/orderdigital-bridge
+2. Click **Build & deploy → Continuous deployment → Git repository**
+3. Select **GitHub** and authorise Netlify
+4. Choose the `kyridigital/orderdigital-bridge` repository
+5. Netlify will auto-detect the build settings from `netlify.toml`:
    - Build command: `npm run build`
    - Publish directory: `dist`
-5. Click **Deploy site**
-6. Add your old domain under **Domain settings → Add custom domain**
+6. Save — from now on every push to `main` will deploy automatically.
 
-### Important DNS note
+## Connect your custom domain
 
-Point the old OrderDigital domain’s DNS to Netlify so visitors land on this bridging page instead of the old site. Netlify will provide the required DNS records after you add the custom domain.
+1. In the Netlify admin, go to **Domain settings → Add custom domain**
+2. Enter `orderdigital.co.uk` (or whichever old domain you want to point here)
+3. Update the domain’s DNS to Netlify’s servers when prompted
+4. Add an SSL/TLS certificate (Netlify can provision one automatically)
 
-## Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial bridging page"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/orderdigital-bridge.git
-git push -u origin main
-```
+Once the DNS propagates, anyone visiting the old OrderDigital domain will see the bridging page and be redirected to Takeaway Growth Agency.
 
 ## License
 
