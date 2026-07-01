@@ -10,7 +10,7 @@ function App() {
   const [isExiting, setIsExiting] = useState(false)
 
   const finishExit = useCallback(() => {
-    window.location.href = NEW_SITE_URL
+    window.location.replace(NEW_SITE_URL)
   }, [])
 
   const startExit = useCallback(() => {
@@ -40,10 +40,22 @@ function App() {
   useEffect(() => {
     if (!isExiting) return
     const fallback = setTimeout(() => {
-      window.location.href = NEW_SITE_URL
+      window.location.replace(NEW_SITE_URL)
     }, 2200)
     return () => clearTimeout(fallback)
   }, [isExiting])
+
+  // Reset exit state when the browser restores the page from bfcache
+  useEffect(() => {
+    const handlePageShow = (e) => {
+      if (e.persisted) {
+        setIsExiting(false)
+        setSecondsLeft(REDIRECT_SECONDS)
+      }
+    }
+    window.addEventListener('pageshow', handlePageShow)
+    return () => window.removeEventListener('pageshow', handlePageShow)
+  }, [])
 
   return (
     <>

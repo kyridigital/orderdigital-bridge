@@ -39,11 +39,18 @@ npm run build
 
 The static site is output to the `dist/` folder.
 
-## Continuous deployment
+## Deployment
 
-A GitHub Actions workflow (`.github/workflows/deploy.yml`) is configured to trigger a Netlify deploy on every push to `main`.
+The site is deployed to Netlify. The previous GitHub Actions auto-deploy workflow was removed because it triggered failing builds through a misconfigured build hook.
 
-To complete the setup, connect the GitHub repo inside Netlify:
+To deploy manually from this repo:
+
+```bash
+npm run build
+netlify deploy --prod --dir=dist
+```
+
+To set up automatic deploys on every push to `main`, connect the GitHub repo inside Netlify:
 
 1. Go to https://app.netlify.com/projects/orderdigital-bridge
 2. Click **Build & deploy → Continuous deployment → Git repository**
@@ -52,7 +59,7 @@ To complete the setup, connect the GitHub repo inside Netlify:
 5. Netlify will auto-detect the build settings from `netlify.toml`:
    - Build command: `npm run build`
    - Publish directory: `dist`
-6. Save — from now on every push to `main` will deploy automatically.
+6. Save — from then on every push to `main` will deploy automatically.
 
 ## Connect your custom domain
 
