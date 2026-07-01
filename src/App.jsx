@@ -36,6 +36,15 @@ function App() {
     startExit()
   }
 
+  // Fallback: redirect even if the canvas animation fails to complete
+  useEffect(() => {
+    if (!isExiting) return
+    const fallback = setTimeout(() => {
+      window.location.href = NEW_SITE_URL
+    }, 2200)
+    return () => clearTimeout(fallback)
+  }, [isExiting])
+
   return (
     <>
       <ExitAnimation active={isExiting} onComplete={finishExit} />

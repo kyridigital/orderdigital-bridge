@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 const DURATION = 1600
+const FALLBACK_BUFFER = 300
 
 function createParticles(width, height) {
   const area = width * height
@@ -40,7 +41,12 @@ function createParticles(width, height) {
 export function ExitAnimation({ active, onComplete }) {
   const canvasRef = useRef(null)
   const rafRef = useRef(null)
+  const timeoutRef = useRef(null)
   const startTimeRef = useRef(null)
+  const onCompleteRef = useRef(onComplete)
+
+  // Keep the callback ref fresh without restarting the effect
+  onCompleteRef.current = onComplete
 
   useEffect(() => {
     if (!active) return
@@ -125,16 +131,22 @@ export function ExitAnimation({ active, onComplete }) {
       if (progress < 1) {
         rafRef.current = requestAnimationFrame(animate)
       } else {
-        onComplete()
+        onCompleteRef.current()
       }
     }
 
     rafRef.current = requestAnimationFrame(animate)
 
+    // Safety net: redirect even if the animation loop is paused/cancelled
+    timeoutRef.current = setTimeout(() => {
+      onCompleteRef.current()
+    }, DURATION + FALLBACK_BUFFER)
+
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
-  }, [active, onComplete])
+  }, [active])
 
   if (!active) return null
   return <canvas ref={canvasRef} className="exit-canvas" aria-hidden="true" />
