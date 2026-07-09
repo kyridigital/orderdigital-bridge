@@ -398,6 +398,19 @@ h1 {
   text-decoration: underline;
 }
 
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin: 18px 0 4px;
+}
+
+.footer-legal a {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
 .copyright {
   margin-top: 10px;
 }
