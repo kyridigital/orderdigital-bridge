@@ -167,12 +167,12 @@ export function BridgeLanding() {
             <a href="mailto:hello@takeawaygrowthagency.com">hello@takeawaygrowthagency.com</a>
           </p>
           <nav className="footer-legal" aria-label="Legal">
-            <a href="/merchantserviceagreement">Merchant Service Agreement</a>
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/pricepromisemerchantterms">Price Promise Terms</a>
-            <a href="/moneybackguaranteeterms">Money Back Guarantee Terms</a>
-            <a href="/additionalmarketingterms">Additional Marketing Terms</a>
-            <a href="/thirdpartyintegrationterms">Third Party Integration Terms</a>
+            <a href="https://takeawaygrowthagency.com/terms/merchant-services-terms">Merchant Service Agreement</a>
+            <a href="https://takeawaygrowthagency.com/terms/privacy">Privacy Policy</a>
+            <a href="https://takeawaygrowthagency.com/terms/pricepromisemerchantterms">Price Promise Terms</a>
+            <a href="https://takeawaygrowthagency.com/terms/moneybackguaranteeterms">Money Back Guarantee Terms</a>
+            <a href="https://takeawaygrowthagency.com/terms/additionalmarketingterms">Additional Marketing Terms</a>
+            <a href="https://takeawaygrowthagency.com/terms/thirdpartyintegrationterms">Third Party Integration Terms</a>
           </nav>
           <p className="copyright">
             © {new Date().getFullYear()} Takeaway Growth Agency. Formerly OrderDigital.
